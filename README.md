@@ -14,9 +14,10 @@ Analyze retail sales data to identify trends and key business insights.
 - Profit analysis
 
 ## 🔍 Key Insights
-- West region generates the highest sales
-- Sales are concentrated in top cities
-- Certain categories drive more profit
+- West region generates the highest total sales among all regions
+- Sales are concentrated in a few top-performing cities
+- Technology category contributes higher profit compared to others
+- A small number of locations drive a large portion of revenue
 
 ## 📁 Files
 - SQL queries file
