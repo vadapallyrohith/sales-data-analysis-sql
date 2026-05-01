@@ -67,3 +67,55 @@ SELECT Region, SUM(Profit) AS total_profit
 FROM orders
 GROUP BY Region;
 
+-- High value orders
+SELECT * FROM orders
+WHERE Sales > 1000;
+
+-- Only West region
+SELECT * FROM orders
+WHERE Region = 'West';
+
+-- Specific categories
+SELECT * FROM orders
+WHERE Category IN ('Furniture', 'Technology');
+
+-- Sales by category in West region
+SELECT Category, SUM(Sales) AS total_sales
+FROM orders
+WHERE Region = 'West'
+GROUP BY Category;
+
+-- Only profitable orders
+SELECT Region, SUM(Profit) AS total_profit
+FROM orders
+WHERE Profit > 0
+GROUP BY Region;
+
+-- Loss making categories
+SELECT Category, SUM(Profit) AS total_profit
+FROM orders
+GROUP BY Category
+HAVING total_profit < 0;
+
+-- Top states in West region
+SELECT State, SUM(Sales) AS total_sales
+FROM orders
+WHERE Region = 'West'
+GROUP BY State
+ORDER BY total_sales DESC
+LIMIT 5;
+
+SELECT Category,
+       SUM(Sales) AS total_sales,
+       SUM(Profit) AS total_profit
+FROM orders
+GROUP BY Category
+HAVING SUM(Sales) > 50000 AND SUM(Profit) < 5000;
+
+-- Medium value orders
+SELECT * FROM orders
+WHERE Sales BETWEEN 100 AND 500;
+
+WHERE Sales >= 200 AND Sales <= 800
+
+Sales > 100 AND Sales < 500
