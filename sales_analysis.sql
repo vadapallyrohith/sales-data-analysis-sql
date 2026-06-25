@@ -85,7 +85,7 @@ FROM orders
 WHERE Region = 'West'
 GROUP BY Category;
 
--- Only profitable orders
+-- Only profitable Regions
 SELECT Region, SUM(Profit) AS total_profit
 FROM orders
 WHERE Profit > 0
@@ -97,7 +97,7 @@ FROM orders
 GROUP BY Category
 HAVING total_profit < 0;
 
--- Top states in West region
+-- Top 5 states in West region
 SELECT State, SUM(Sales) AS total_sales
 FROM orders
 WHERE Region = 'West'
