@@ -129,3 +129,62 @@ FROM Orders
 WHERE Region = 'West'
   AND Sales BETWEEN 100 AND 500
 ORDER BY Profit DESC;
+
+
+--How much sales does each regional manager oversee?
+SELECT
+    o.Region,
+    r.Manager,
+    SUM(o.Sales) AS Total_Sales
+FROM orders o
+INNER JOIN region_info r
+ON o.Region = r.Region
+GROUP BY o.Region, r.Manager;
+
+
+--Which regional manager has higher sales?
+SELECT
+    o.Region,
+    r.Manager,
+    SUM(o.Sales) AS Total_Sales
+FROM orders o
+INNER JOIN region_info r
+ON o.Region = r.Region
+GROUP BY o.Region, r.Manager
+ORDER BY SUM(o.Sales) DESC;
+
+--Total Profit by Manager
+Select r.manager,
+sum(o.profit) as Total_Profit
+From orders o
+inner join region_info r
+on o.region = r.region
+Group by r.manager;
+
+
+--Number of Orders by Manager
+Select r.manager,
+count(*) as Total_Orders
+From orders o
+inner join region_info r
+on o.region = r.region
+Group by r.manager;
+
+
+--Average Sales by Manager
+Select r.manager,
+avg(o.sales) as Avg_Sales
+From orders o
+inner join region_info r
+on o.region = r.region
+Group by r.manager;
+
+
+--Total Sales and Profit Together
+Select r.manager,
+sum(o.sales) as Total_Sales,
+sum(o.profit) as Total_Profit
+From orders o
+inner join region_info r
+on o.region = r.region
+Group by r.manager;
