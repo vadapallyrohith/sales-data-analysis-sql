@@ -112,10 +112,20 @@ FROM orders
 GROUP BY Category
 HAVING SUM(Sales) > 50000 AND SUM(Profit) < 5000;
 
--- Medium value orders
+-- Medium value orders; (returns values from 100 to 500)
 SELECT * FROM orders
 WHERE Sales BETWEEN 100 AND 500;
+-- or
+SELECT * FROM orders
+WHERE Sales >= 100 AND Sales <= 500;
 
-WHERE Sales >= 200 AND Sales <= 800
-
+-- Medium value orders; (returns values from 101 to 499)
+SELECT * FROM orders
 Sales > 100 AND Sales < 500
+
+--Show all orders from the West region where Sales are between 100 and 500, ordered by Profit in descending order.---
+SELECT *
+FROM Orders
+WHERE Region = 'West'
+  AND Sales BETWEEN 100 AND 500
+ORDER BY Profit DESC;
