@@ -188,3 +188,49 @@ From orders o
 inner join region_info r
 on o.region = r.region
 Group by r.manager;
+
+
+-- PARTITION BY temporarily groups rows for a calculation, then returns every original row.
+-- PARTITION BY creates temporary groups for calculations without collapsing the dataset.
+
+-- Sales by Region
+SELECT
+    Region,
+    Sales,
+    SUM(Sales) OVER(PARTITION BY Region) AS Region_Total
+FROM Orders;
+
+-- Average Sales by Region
+SELECT
+    Region,
+    Sales,
+    AVG(Sales) OVER(PARTITION BY Region) AS Avg_Regional_Sales
+FROM Orders;
+
+-- Number Orders Within Region
+SELECT
+    Region,
+    Sales,
+    COUNT(*) OVER(PARTITION BY Region) AS Orders_In_Region
+FROM Orders;
+
+
+-- Sales in City using ROW_NUMBER, RANK, DENSE_RANK
+-- ROW_NUMBER(), RANK(), and DENSE_RANK() differ only in how they handle ties.
+SELECT
+    City,
+    Sales,
+    ROW_NUMBER() OVER(ORDER BY Sales DESC) AS Row_Num
+FROM Orders;
+
+SELECT
+    City,
+    Sales,
+    RANK() OVER(ORDER BY Sales DESC) AS Sales_Rank
+FROM Orders;
+
+SELECT
+    City,
+    Sales,
+    DENSE_RANK() OVER(ORDER BY Sales DESC) AS Dense_Rank
+FROM Orders;
